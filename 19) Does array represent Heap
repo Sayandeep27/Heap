@@ -1,0 +1,21 @@
+bool isMaxHeap(int a[], int n)
+    {
+        int j=0;
+        int i=1;
+        
+        while(i<n)
+        {
+            if(a[i]>a[j]) return false;
+            
+            i++;
+            
+            if(i>=n) break;
+            
+            if(a[i]>a[j]) return false;
+            
+            i++;
+            j++;
+        }
+        
+        return true;
+    }
