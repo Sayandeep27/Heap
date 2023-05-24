@@ -1,3 +1,41 @@
+
+    vector<int> replaceWithRank(vector<int> &arr, int n){
+        
+        vector<int>ans;
+        
+        map<int,int>mp;
+        
+        vector<int>v=arr;
+        
+        sort(v.begin(),v.end());
+        
+        int cnt=1;
+        
+        for(int i=0;i<n;i++)
+        {
+            if(mp.find(v[i])==mp.end())  // not seen before
+            {
+                mp[v[i]]=cnt;
+                cnt++;
+            }
+        }
+        
+        for(int i=0;i<n;i++)
+        {
+            ans.push_back(mp[arr[i]]);
+        }
+        
+        return ans;
+
+    }
+
+      
+
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 typedef pair<int,int> pi;
 
 class Solution{
