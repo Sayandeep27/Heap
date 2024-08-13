@@ -1,21 +1,41 @@
-bool isMaxHeap(int a[], int n)
-    {
-        int j=0;
-        int i=1;
-        
-        while(i<n)
-        {
-            if(a[i]>a[j]) return false;
-            
-            i++;
-            
-            if(i>=n) break;
-            
-            if(a[i]>a[j]) return false;
-            
-            i++;
-            j++;
-        }
-        
-        return true;
+bool isMaxHeap(vector<int>& arr) {
+    int n = arr.size();
+    
+    // Start from the first non-leaf node and move up the heap
+    for (int i = 0; i <= (n - 2) / 2; i++) {
+        int leftChild = 2 * i + 1;
+        int rightChild = 2 * i + 2;
+
+        // If the current node is smaller than the left child, return false
+        if (leftChild < n && arr[i] < arr[leftChild])
+            return false;
+
+        // If the current node is smaller than the right child, return false
+        if (rightChild < n && arr[i] < arr[rightChild])
+            return false;
     }
+
+    return true; // If no violations are found, return true
+}
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+bool isMinHeap(vector<int>& arr) {
+    int n = arr.size();
+    
+    // Start from the first non-leaf node and move up the heap
+    for (int i = 0; i <= (n - 2) / 2; i++) {
+        int leftChild = 2 * i + 1;
+        int rightChild = 2 * i + 2;
+
+        // If the current node is greater than the left child, return false
+        if (leftChild < n && arr[i] > arr[leftChild])
+            return false;
+
+        // If the current node is greater than the right child, return false
+        if (rightChild < n && arr[i] > arr[rightChild])
+            return false;
+    }
+
+    return true; // If no violations are found, return true
+}
