@@ -1,30 +1,56 @@
-class Solution{
-public:
-    
-    void convertMinToMaxHeap(vector<int> &arr, int n){
-       for(int i=(n/2)-1;i>=0;i--){
-           heapify(arr,n,i);
-       }
-        
-        
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+// Function to heapify a subtree rooted at node i in a max-heap
+void heapify(vector<int>& arr, int n, int i) {
+    int largest = i;        // Initialize largest as root
+    int left = 2 * i + 1;   // left = 2*i + 1
+    int right = 2 * i + 2;  // right = 2*i + 2
+
+    // If the left child is larger than the root
+    if (left < n && arr[left] > arr[largest])
+        largest = left;
+
+    // If the right child is larger than the largest so far
+    if (right < n && arr[right] > arr[largest])
+        largest = right;
+
+    // If the largest is not the root
+    if (largest != i) {
+        swap(arr[i], arr[largest]);  // Swap the root with the largest
+        heapify(arr, n, largest);    // Recursively heapify the affected subtree
     }
-    
-    void heapify(vector<int> &a,int n,int i){
-        
-        while(1){
-            int l = 2*i+1;
-            int r = 2*i+2;
-            int largest = i;
-            if(l<n && a[l]>a[largest]) largest = l;
-            if(r<n && a[r]>a[largest]) largest = r;
-            
-            if(largest!=i){
-                swap(a[largest],a[i]);
-                i = largest;
-            }else{
-                break;
-            }
-        }
+}
+
+// Function to convert min-heap to max-heap
+void convertMinHeapToMaxHeap(vector<int>& arr) {
+    int n = arr.size();
+
+    // Start from the last non-leaf node and heapify each node
+    // (n/2 - 1) is the index of the last non-leaf node
+    for (int i = n / 2 - 1; i >= 0; i--) {
+        heapify(arr, n, i);
     }
-    
-};
+}
+
+int main() {
+    vector<int> minHeap = {3, 5, 9, 6, 8, 20, 10, 12, 18, 9};
+
+    cout << "Min-Heap array: ";
+    for (int i : minHeap) {
+        cout << i << " ";
+    }
+    cout << endl;
+
+    convertMinHeapToMaxHeap(minHeap);
+
+    cout << "Max-Heap array: ";
+    for (int i : minHeap) {
+        cout << i << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
